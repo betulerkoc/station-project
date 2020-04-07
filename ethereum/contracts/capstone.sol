@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 <0.6.0;
+pragma solidity ^0.4.17;
 
 contract StationFactory {
     address[] public deployedStation;
@@ -39,13 +39,13 @@ contract Station {
         _;
     }
    
-    constructor (string _location, string _stationType, uint _capacity, address creator) public {
+    function Station(string _location, string _stationType, uint _capacity, address creator) public {
         stationOwner = creator;
         stationType = _stationType;
         location = _location;
         totalCapacity = _capacity;
         
-        for (uint i=0; i<23; i++) {
+        for (uint i = 0; i<23; i++) {
         slots[i] = Slot({capacity: _capacity, isAvailable: true, owner: userAddress, price: price});
         }
     }
@@ -60,7 +60,7 @@ contract Station {
         require(slot.isAvailable);
         slot.capacity--;
         slot.owner = msg.sender;
-        if(slot.capacity<1) {
+        if (slot.capacity < 1) {
             slot.isAvailable = false;
         }
     }
